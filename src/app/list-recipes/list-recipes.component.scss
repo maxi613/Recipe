@@ -1,0 +1,73 @@
+div{
+    height: 97.5vh;
+    background-color: rgb(70, 70, 70);
+    color: white;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.rezept-bar{
+    margin-top: 15px;
+   // border-top: 0.5px solid white;
+    border-bottom: 0.5px solid white;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    span{
+        font-size: 16px;
+        margin-left: 10px;
+    }
+
+    img{
+        margin-right: 20px;
+        height: 0px;
+    }
+
+    &:hover{
+
+        img{
+            height: 25px;
+            transition: all 0.2s ease;
+            &:hover{
+                cursor: pointer;
+                height: 30px;
+            }
+        }
+    }
+}
+.item-list{
+    margin-top: 0px;
+    text-decoration: none;
+    margin-left: 0px;
+    padding-left: 0px;
+    li{
+        padding: 9px 15px;
+        padding-top: 10px;
+        padding-left: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-left: 0px;
+        list-style: none;
+        transition: all 0.2s ease;
+        &:hover{
+            background-color:rgb(102, 102, 102); ;
+        }
+
+
+    }
+
+    li img{
+        margin-right: 10px;
+        height: 20px;
+    }
+
+    li span{
+        display: flex;
+    }
+
+}
