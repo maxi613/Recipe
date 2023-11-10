@@ -7,10 +7,21 @@ div{
     flex-direction: column;
 }
 
+.item:hover{
+    .icon-add{
+        height: 28px;
+        border-radius: 5px;
+        &:hover{
+            cursor: pointer;
+            
+            background-color: rgb(102, 102, 102);
+        }
+    }
+}
 .rezept-bar{
     margin-top: 15px;
    // border-top: 0.5px solid white;
-    border-bottom: 0.5px solid white;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.705);
     height: 40px;
     width: 100%;
     display: flex;
@@ -27,18 +38,8 @@ div{
         height: 0px;
     }
 
-    &:hover{
-
-        img{
-            height: 25px;
-            transition: all 0.2s ease;
-            &:hover{
-                cursor: pointer;
-                height: 30px;
-            }
-        }
-    }
 }
+
 .item-list{
     margin-top: 0px;
     text-decoration: none;
@@ -55,7 +56,7 @@ div{
         list-style: none;
         transition: all 0.2s ease;
         &:hover{
-            background-color:rgb(102, 102, 102); ;
+            background-color:rgb(102, 102, 102);
         }
 
 
@@ -68,6 +69,31 @@ div{
 
     li span{
         display: flex;
+    }
+
+    .input-notshow{
+        display: none;
+    }
+
+    .input-show{
+        width: auto;
+        height: auto;
+    }
+
+    input[type=text]{
+        font-size: 14px;
+        border: 0;
+        outline: none;
+        width: 100%;
+        color: white;
+        border-radius: 4px;
+        background-color: rgb(59, 59, 59);
+        border-bottom: 1px solid rgb(59, 59, 59);
+
+        &:focus{
+            border: 0;
+            border: 1px solid rgb(10, 126, 235);
+        }
     }
 
 }

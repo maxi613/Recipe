@@ -1,12 +1,16 @@
-<div>
+<div class="item">
     <div class="rezept-bar">
         <span>Rezepte</span>
-        <img src="assets/addenios.png">
+        <img class="icon-add" (click)="showInput()" src="assets/addenios.png">
     </div>
     <ul class="item-list">
-        <li *ngFor="let recipe of recipes">
+        <li  *ngFor="let recipe of recipes">
             <img src="assets/ordner.png">
-            <span>{{recipe}}</span>
+            <span (contextmenu)="showContextMenu($event)">{{recipe}}</span>
+        </li>
+        <li [ngClass]="{'input-show': addClicked, 'input-notshow': !addClicked}">
+            <img src="assets/ordner.png">
+            <input #recipeinput (keypress)="addRecipe($event)" type="text" (focusout)="intputDefocued()">
         </li>
     </ul>
 </div>

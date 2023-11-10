@@ -4,7 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { invoke } from '@tauri-apps/api';
 import { open, save} from '@tauri-apps/api/dialog';
 import { ListRecipesComponent } from './list-recipes/list-recipes.component';
-
+import { onEventShowMenu } from "tauri-plugin-context-menu";
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -19,6 +19,7 @@ export class AppComponent {
   async ping(){
     this.response = await invoke('ping');
   }
+
 
   async save(){
     const path = await save({
