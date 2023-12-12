@@ -196,5 +196,11 @@ nav input{
   height: 100%;
   display: flex;
   justify-content: flex-start;
-  flex-direction: column;
+  flex-direction: row;
+
+  app-recipe-table{
+    padding-top: 60px;
+    padding-left: 50px;
+  }
+
 }

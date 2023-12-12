@@ -5,8 +5,9 @@
     </div>
     <ul class="item-list">
         <li  *ngFor="let recipe of recipes">
-            <img src="assets/ordner.png">
-            <span (contextmenu)="showContextMenu($event)">{{recipe}}</span>
+            <img class="icon-ordner" src="assets/ordner.png">
+            <span>{{recipe}}</span>
+            <img class="icon-delete" src="assets/delete.png" (click)="deleteItem(recipe)">
         </li>
         <li [ngClass]="{'input-show': addClicked, 'input-notshow': !addClicked}">
             <img src="assets/ordner.png">

@@ -1,20 +1,25 @@
-import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { showMenu } from "tauri-plugin-context-menu";
-import { Item, Options } from 'tauri-plugin-context-menu/dist/types';
+import { Component, ViewChild } from '@angular/core';
+import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { deleteModel } from '../shared/Models/delete';
+import { filter } from 'rxjs';
+import { InternalStorageService } from '../shared/services/internal-storage/internal-storage.service';
 
 @Component({
+ // imports : [CommonModule],
   selector: 'app-list-recipes',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './list-recipes.component.html',
   styleUrl: './list-recipes.component.scss'
 })
 export class ListRecipesComponent {
   @ViewChild('recipeinput') recipeInput: any;
 
+  constructor(public dialog:MatDialog, private internalStorage: InternalStorageService){}
+
   addClicked: boolean=false;
-  recipes:string[] = ['Station 220','Station 320','Station 230']
+  recipes:string[] = ['My first Recipe'];
   listInput: number[] =[];
 
   showInput(){
@@ -25,9 +30,11 @@ export class ListRecipesComponent {
   }
 
   addRecipe($event: any){
-
+ 
     if($event.key==='Enter'){
       this.recipes.push($event.target.value)
+      console.log($event.target.value);
+      this.internalStorage.initRecipe($event.target.value);
       $event.target.value= '';
       this.addClicked = false;
     }
@@ -36,6 +43,7 @@ export class ListRecipesComponent {
       $event.target.value= '';
       this.addClicked = false;
     }
+
   }
 
   intputDefocued(){
@@ -43,19 +51,28 @@ export class ListRecipesComponent {
     this.recipeInput.nativeElement.value ='';
   }
 
-  showContextMenu($event: any){
-    console.log($event)
-    let deleteItem: Item ={
-      label: 'Delte',
-      shortcut: 'CTRL+X',
-      event: (e)=>{
-        console.log(e);
-      }
+  deleteItem(item: string){
+    
+    let deleteObj: deleteModel= {
+      name: item, 
+      delete: false
     }
-    showMenu({
-      items:[deleteItem]
 
+    const dialogref = this.dialog.open(DeleteDialogComponent,{
+      data:{name: deleteObj.name, delete: deleteObj.delete},
+      width: '400px'
     })
+    dialogref.afterClosed().pipe(filter(data => data.delete == true)).subscribe(()=> {
+      let index=this.recipes.indexOf(item);
+
+      this.recipes.splice(index, index)
+  
+      if(index == 0){
+        console.log(index)
+        this.recipes.splice(index, index+1)
+      }
+    });
 
   }
+
 }
