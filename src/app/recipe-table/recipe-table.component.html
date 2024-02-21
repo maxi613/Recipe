@@ -1,32 +1,29 @@
 <div class="tableview">
+    <h1>{{dataset?.name}}</h1>
     <div class="menu">
-        <img class="menu-item" src="assets/setting.png" matTooltip="Edit" [matTooltipPosition]="'above'">
+        <img class="menu-item" src="assets/setting.png" matTooltip="Edit" (click)="openEditDialog()" [matTooltipPosition]="'above'">
         <img class="menu-item" src="assets/save.png" matTooltip="Save"  [matTooltipPosition]="'above'">
+        <img class="menu-item" src="assets/addRow.png" matTooltip="Add Row" (click)="addRow()" [matTooltipPosition]="'above'">
     </div>
 
     <table class="content-table">
         <thead>
-            
             <tr>
-                <th>Data 1 [Integer]</th>
-                <th>Data 2 [Real]</th>
-                <th>Data 1 [Real]</th>
-                <th>Data 2 [DInt]</th>
+                @for (item of dataset?.attributes; track $index) {
+                <th>{{item.name}} [{{item.typeWritte}}]</th>
+                }
             </tr>
         </thead>
         <tbody>
+            @for (recipe of dataset?.recipes; track $index) {
             <tr>
-                <td>1235</td>
-                <td>1235</td>
-                <td>1235</td>
-                <td>1235</td>
-            </tr>
-            <tr>
-                <td>1235</td>
-                <td>1235</td>
-                <td>1235</td>
-                <td>1235</td>
-            </tr>
+                @for (values of recipe.values; track $index) {
+                <td>
+                    {{values}}
+                </td>
+                }
+              </tr>
+            }
             </tbody>
     </table>
 </div>

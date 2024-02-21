@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { project, recipe } from '../../Models/recipe';
+import { attribute, dataset, project, recipe } from '../../Models/recipe';
 import { invoke, updater } from '@tauri-apps/api';
 import { TestBed } from '@angular/core/testing';
 
@@ -9,7 +9,6 @@ import { TestBed } from '@angular/core/testing';
 export class InternalStorageService {
 
   public project: project; 
-
   constructor() { }
 
   newProjekt(_name: string){
@@ -18,30 +17,36 @@ export class InternalStorageService {
       id: `${_name}_${Date.now().toString()}`,
       name: _name, 
       creationDate: Date.now(), 
-      recipes: undefined,
+      datasets:[]
     }
 
     this.project = _project;
   }
 
-  public getRecipes(): recipe[] | undefined{
-    return this.project.recipes;
+  public getDatasets(): dataset[] | undefined{
+    return this.project.datasets;
+  }
+
+  public getDataset(id: string):dataset | undefined{
+    return this.project.datasets?.find(dataset => dataset.name == id)
+
   }
 
 
-  public initRecipe(name:string){
+  public initDataset(name:string){
     let newID: string; 
-   
-     this.project.recipes?.length == undefined ? newID = "1" : newID =(this.project.recipes?.length+1).toString();
+
+    this.project.datasets?.length == undefined ? newID = "1" : newID =(this.project.datasets?.length+1).toString();
 
     if(newID != undefined){
-      let recipe: recipe ={
+      let dataset: dataset ={
         name: name, 
-        id: newID.toString()
+        id: newID.toString(), 
+        attributes: [],
+        recipes: []
       }
-      console.log(recipe);
-      this.project.recipes?.push(recipe);
-      console.log(this.project);
+      
+      this.project.datasets?.push(dataset);
     }
 
   }

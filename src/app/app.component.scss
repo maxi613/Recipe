@@ -198,8 +198,7 @@ nav input{
   justify-content: flex-start;
   flex-direction: row;
 
-  app-recipe-table{
-    padding-top: 60px;
+  router-outlet{
     padding-left: 50px;
   }
 

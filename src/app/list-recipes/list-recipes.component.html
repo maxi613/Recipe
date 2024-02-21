@@ -1,12 +1,12 @@
 <div class="item">
-    <div class="rezept-bar">
+    <div class="rezept-bar" >
         <span>Rezepte</span>
         <img class="icon-add" (click)="showInput()" src="assets/addenios.png">
     </div>
     <ul class="item-list">
         <li  *ngFor="let recipe of recipes">
             <img class="icon-ordner" src="assets/ordner.png">
-            <span>{{recipe}}</span>
+            <span [routerLink]="['/recipe', recipe]">{{recipe}}</span>
             <img class="icon-delete" src="assets/delete.png" (click)="deleteItem(recipe)">
         </li>
         <li [ngClass]="{'input-show': addClicked, 'input-notshow': !addClicked}">

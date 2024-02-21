@@ -8,7 +8,7 @@ import { filter } from 'rxjs';
 import { InternalStorageService } from '../shared/services/internal-storage/internal-storage.service';
 
 @Component({
- // imports : [CommonModule],
+  //imports : [CommonModule],
   selector: 'app-list-recipes',
   templateUrl: './list-recipes.component.html',
   styleUrl: './list-recipes.component.scss'
@@ -19,8 +19,8 @@ export class ListRecipesComponent {
   constructor(public dialog:MatDialog, private internalStorage: InternalStorageService){}
 
   addClicked: boolean=false;
-  recipes:string[] = ['My first Recipe'];
-  listInput: number[] =[];
+
+  recipes : string[]=[]
 
   showInput(){
     this.addClicked = true;
@@ -32,9 +32,9 @@ export class ListRecipesComponent {
   addRecipe($event: any){
  
     if($event.key==='Enter'){
+
       this.recipes.push($event.target.value)
-      console.log($event.target.value);
-      this.internalStorage.initRecipe($event.target.value);
+      this.internalStorage.initDataset($event.target.value);
       $event.target.value= '';
       this.addClicked = false;
     }
@@ -72,7 +72,6 @@ export class ListRecipesComponent {
         this.recipes.splice(index, index+1)
       }
     });
-
   }
 
 }

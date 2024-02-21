@@ -61,8 +61,16 @@
 }
 
 .tableview{
-    margin: 0px;
+    margin-top: 25px;
     flex-direction: column;
     align-items: start;
     justify-content:flex-start;
+
+    h1{
+        color: white;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        font-style: italic;
+
+    }
 }
