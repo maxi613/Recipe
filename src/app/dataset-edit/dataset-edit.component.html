@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Current Dataset <i>"{{data.name}}"</i></h1>
+
+<div class="content">
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Datatype</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of data.attributes; track $index) {
+            <tr>
+                <td>
+                    @if (item.disabled != undefined) {
+                    <input type="text" class="attribute-name" [(ngModel)]="item.name" [disabled]="item.disabled">
+                    }
+                </td>
+                <td>
+                    <div class="select">
+                        <select name="format" id="format" [(ngModel)]="item.typeWritte" (ngModelChange)="selectChanged($event, $index)">
+                            @for (type of datatypes; track $index) {
+                            <option [ngValue]="type.name" [disabled]="item.disabled">{{type.name}}</option>
+                            }
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <img class="delete-item" (click)="removeAttribute(item)"  src="assets/delete.png"/>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <img (click)="addAtribute()" class="menu-item" src="assets/plus.png">
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="data.attributes"  >OK</button>
+</div>
+
